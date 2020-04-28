@@ -122,7 +122,7 @@ export default class Home extends Component {
         } = this.state;
 
         if(this.state.unit === 'bu'){
-            this.setState({buPrice: `$ ${price}`})
+            this.setState({buPrice: `$ ${(price).toFixed(2)}`})
 
         } else {
             this.setState({buPrice: `$ ${(grain.TW * pricePerPound).toFixed(2)}`})
