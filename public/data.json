@@ -1,0 +1,45 @@
+{
+    "grains": [
+        {
+            "id": 1,
+            "name": "Barley",
+            "TW": 48
+        },
+        {
+            "id": 2,
+            "name": "Corn, (shelled)",
+            "TW": 56
+        },
+        {
+            "id": 3,
+            "name": "Flax",
+            "TW": 56
+        },
+        {
+            "id": 4,
+            "name": "Oats",
+            "TW": 32
+        },
+        {
+            "id": 5,
+            "name": "Peas",
+            "TW": 60
+        },
+        {
+            "id": 6,
+            "name": "Rye",
+            "TW": 56
+        },
+        {
+            "id": 7,
+            "name": "Soybeans",
+            "TW": 60
+        },
+        {
+            "id": 8,
+            "name": "Wheat",
+            "TW": 60
+        }
+
+    ]
+}
