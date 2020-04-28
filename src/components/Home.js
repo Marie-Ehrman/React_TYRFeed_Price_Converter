@@ -25,7 +25,8 @@ export default class Home extends Component {
             pricePerPound: null,
             buPrice: null,
             stPrice: null,
-            mtPrice: null
+            mtPrice: null,
+            cwtPrice: null
 
 
     
@@ -92,16 +93,19 @@ export default class Home extends Component {
             this.calcBuPrice();
             this.calcSTPrice();
             this.calcMTPrice();
+            this.calcCWTPrice();
         } else if(this.state.unit === 'st') {
             this.setState({pricePerPound: (this.state.price/shortTon)})
             this.calcBuPrice();
             this.calcSTPrice();
             this.calcMTPrice();
+            this.calcCWTPrice();
         } else if(this.state.unit === 'mt'){
             this.setState({pricePerPound: (this.state.price/metricTon)})
             this.calcBuPrice();
             this.calcSTPrice();
             this.calcMTPrice();
+            this.calcCWTPrice();
         }
 
         console.log(this.state.pricePerPound)
@@ -118,10 +122,10 @@ export default class Home extends Component {
         } = this.state;
 
         if(this.state.unit === 'bu'){
-            this.setState({buPrice: price})
+            this.setState({buPrice: `$ ${price}`})
 
         } else {
-            this.setState({buPrice: (grain.TW * pricePerPound).toFixed(2)})
+            this.setState({buPrice: `$ ${(grain.TW * pricePerPound).toFixed(2)}`})
 
         }
 
@@ -133,7 +137,7 @@ export default class Home extends Component {
           pricePerPound,
         } = this.state;
 
-            this.setState({stPrice: (2000 * pricePerPound).toFixed(2)})
+            this.setState({stPrice: `$ ${(2000 * pricePerPound).toFixed(2)}`})
 
 
       }
@@ -144,8 +148,17 @@ export default class Home extends Component {
           pricePerPound,
         } = this.state;
 
-            this.setState({mtPrice: (2204.62 * pricePerPound).toFixed(2)})
+            this.setState({mtPrice: `$ ${(2204.62 * pricePerPound).toFixed(2)}`})
 
+
+      }
+
+      calcCWTPrice() {
+        const {
+          pricePerPound,
+        } = this.state;
+
+          this.setState({cwtPrice: `$ ${(pricePerPound * 100).toFixed(2)}`})
 
       }
 
@@ -157,6 +170,8 @@ export default class Home extends Component {
         console.log(this.state.buPrice);
         console.log(this.state.stPrice);
         console.log(this.state.mtPrice);
+        console.log(this.state.cwtPrice);
+
 
 
           const grains = this.state.data;
@@ -167,7 +182,8 @@ export default class Home extends Component {
             unit,
             buPrice,
             stPrice,
-            mtPrice
+            mtPrice,
+            cwtPrice
 
           } = this.state;
 
@@ -177,6 +193,7 @@ export default class Home extends Component {
                 <Card.Body>
 
                     <Card.Title>
+                      Select Grain:
                         <Menu
                             grains={grains}
                             setGrain={this.setGrain.bind(this)}
@@ -185,6 +202,8 @@ export default class Home extends Component {
                     </Card.Title>
 
                     <Card.Subtitle className="mb-2 text-muted">
+                      Select Measurement
+                      <br></br>
                         <Button 
                             className="card-buttons"
                             variant="success"
@@ -197,18 +216,21 @@ export default class Home extends Component {
                             className="card-buttons"
                             variant="success"
                             onClick={this.handleClick}>Metric Ton</Button>
-                    </Card.Subtitle>
+                    </Card.Subtitle> 
+                    
+                    {/* {this.state.grain ? this.state.grain : <br></br>} */}
 
+
+                    <br></br>
                     <InputGroup>
                         <InputGroup.Prepend>
-                          <InputGroup.Text>Quoted Price</InputGroup.Text>
+                          <InputGroup.Text>Quoted Price:</InputGroup.Text>
                         </InputGroup.Prepend>
                         <FormControl
                             as="input"
                             pattern="[^\s*(?=.*[1-9])\d*(?:\.\d{1,2})?\s*$]"
                             aria-label="With textarea"
-                            onChange={this.setPrice}
-                            placeholder="$7.00"/>
+                            onChange={this.setPrice}/>
 
                         <Button 
                             variant="outline-success"
@@ -217,10 +239,10 @@ export default class Home extends Component {
                         </Button>
                     </InputGroup>
 
-
                         {/* <Card.Link href="#">Card Link</Card.Link>
                         <Card.Link href="#">Another Link</Card.Link> */}
                       <div className="price-per">
+                        <br></br>
                         <PricePer 
                               tw={testWeight}
                               price={price}
@@ -228,6 +250,7 @@ export default class Home extends Component {
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}
+                              cwtPrice={cwtPrice}
                         />
                       </div> 
                 </Card.Body>

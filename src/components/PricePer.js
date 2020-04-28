@@ -17,14 +17,19 @@ export default class PricePer extends Component {
                 <Card.Header>Price Per:</Card.Header>
 
                     <ListGroup variant="flush">
-                        <ListGroup.Item>Bushel = $ 
+                        <ListGroup.Item>Bushel = 
                             <output>{ this.props.buPrice }</output>
                         </ListGroup.Item>
-                        <ListGroup.Item>Short Ton = $ 
-                            <output>{ this.props.stPrice }</output></ListGroup.Item>
-                        <ListGroup.Item>Metric Ton = $ 
-                            <output>{ this.props.mtPrice }</output></ListGroup.Item>
+                        <ListGroup.Item>Short Ton = 
+                            <output>{ this.props.stPrice }</output>
+                        </ListGroup.Item>
+                        <ListGroup.Item>Metric Ton = 
+                            <output>{ this.props.mtPrice }</output>
+                        </ListGroup.Item>
                     </ListGroup>
+                    <ListGroup.Item>CWT = 
+                            <output>{ this.props.cwtPrice }</output>
+                    </ListGroup.Item>
                 </Card>
 
             </div>
