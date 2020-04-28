@@ -199,7 +199,6 @@ export default class Home extends Component {
                             onClick={this.handleClick}>Metric Ton</Button>
                     </Card.Subtitle>
 
-
                     <InputGroup>
                         <InputGroup.Prepend>
                           <InputGroup.Text>Quoted Price</InputGroup.Text>
