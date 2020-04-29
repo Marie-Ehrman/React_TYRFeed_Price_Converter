@@ -216,7 +216,7 @@ export default class Home extends Component {
                     </Card.Title>
 
                     <Card.Subtitle className="mb-2 text-muted">
-                      Select Measurement
+                      Select Units
                       <br></br>
                         <Button 
                             className="card-buttons"

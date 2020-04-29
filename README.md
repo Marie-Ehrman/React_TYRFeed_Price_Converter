@@ -1,4 +1,10 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and [React Bootstrap](https://react-bootstrap.github.io/)
+
+# TYR Feed Price Converter Tool
+
+This is meant to be an internal tool for TYR Feed Products. User chooses a grain from the dropdown, selects the unit of measurement, and enters the price they were quoted. It then generated conversions and displays the price for other units of measure.
+
+[Live Link](https://tyr-feed-price-converter.herokuapp.com/)
 
 ## Available Scripts
 
