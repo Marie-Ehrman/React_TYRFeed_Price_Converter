@@ -12,8 +12,7 @@ export default class PricePer extends Component {
         return (
 
             
-            <div className="units">
-                <Card style={{ width: '18rem' }}>
+                <Card className="units" style={{ width: '18rem' }}>
                 <Card.Header>Price Per:</Card.Header>
 
                     <ListGroup variant="flush">
@@ -26,13 +25,13 @@ export default class PricePer extends Component {
                         <ListGroup.Item>Metric Ton = 
                             <output>{ this.props.mtPrice }</output>
                         </ListGroup.Item>
-                    </ListGroup>
-                    <ListGroup.Item>CWT = 
+                                            <ListGroup.Item>CWT = 
                             <output>{ this.props.cwtPrice }</output>
                     </ListGroup.Item>
+                    </ListGroup>
+
                 </Card>
 
-            </div>
         )
     }
 }
