@@ -117,36 +117,38 @@ export default class Home extends Component {
 
     }
 
-    calcPrice(pricePerPound) {
+    calcPrice() {
 
       const {
-        // pricePerPound,
+        pricePerPound,
         price,
         grain
       } = this.state;
 
       if(this.state.unit === 'bu'){
-          this.setState({buPrice: `$ ${(price * 1.00).toFixed(2)}`})
+          this.setState({buPrice: `$ ${(price * 1).toFixed(2)}`})
 
       } else {
+          console.log();
           this.setState({buPrice: `$ ${(grain.TW * pricePerPound).toFixed(2)}`})
 
       }
 
     }
 
-    calcBuPrice(pricePerPound) {
+    calcBuPrice() {
 
         const {
-          // pricePerPound,
+          pricePerPound,
           price,
           grain
         } = this.state;
 
         if(this.state.unit === 'bu'){
-            this.setState({buPrice: `$ ${(price * 1.00).toFixed(2)}`})
+            this.setState({buPrice: `$ ${(price * 1).toFixed(2)}`})
 
         } else {
+          console.log();
             this.setState({buPrice: `$ ${(grain.TW * pricePerPound).toFixed(2)}`})
 
         }
@@ -218,19 +220,27 @@ export default class Home extends Component {
                     <Card.Subtitle className="mb-2 text-muted">
                       Select Units
                       <br></br>
+                      <style type="text/css">
+                              {`
+                              .btn-flat {
+                                background-color: #285844;
+                                color: white;
+                              }
+                              `}
+                            </style>
                         <Button 
                             className="card-buttons"
-                            variant="success"
+                            variant="flat"
                             active
                             onClick={this.handleClick}>Bushel</Button>
                         <Button
                             className="card-buttons"
-                            variant="success"
+                            variant="flat"
                             active
                             onClick={this.handleClick}>Short Ton</Button>
                         <Button
                             className="card-buttons"
-                            variant="success"
+                            variant="flat"
                             active
                             onClick={this.handleClick}>Metric Ton</Button>
                     </Card.Subtitle> 

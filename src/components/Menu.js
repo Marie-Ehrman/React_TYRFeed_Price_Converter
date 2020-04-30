@@ -31,7 +31,7 @@ export default class Menu extends Component {
 
             <DropdownButton
                 className="dropdown"
-                variant="warning"
+                variant="flat"
                 id="dropdown-basic-button"
                 title={this.props.name ? this.props.name : "Grains"}
                 >

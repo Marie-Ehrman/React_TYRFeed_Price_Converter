@@ -8,9 +8,13 @@ export default class Header extends Component {
         return (
 
             <div className="header">
-                <img className="logo" src={logo} alt='logo' />
-                <p>Price Converter</p>
+                <div className="subheader"><img className="logo" src={logo} alt='logo' /><h1 className="feed">Feed</h1></div>
+                <div>
+                    <p>Price Converter</p>
+                </div>
             </div>
+                
+
         )
     }
 }
