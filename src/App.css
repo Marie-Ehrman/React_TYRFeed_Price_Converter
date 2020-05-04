@@ -18,7 +18,7 @@
 .header {
 
   box-shadow: 5px 2px 8px 2px #75461fbd;
-  background-color: #c97939;
+  background-color: rgba(194, 140, 90, 0.918);
   height: 30vh;
   display: flex;
   flex-direction: column;
