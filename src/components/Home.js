@@ -175,6 +175,8 @@ export default class Home extends Component {
         const {
           pricePerPound,
         } = this.state;
+        
+        console.log("IN CWT PRICE");
 
           this.setState({cwtPrice: `$ ${(pricePerPound * 100).toFixed(2)}`})
 
