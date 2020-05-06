@@ -88,82 +88,52 @@ export default class Home extends Component {
       }
 
 
+
+      //CALCULATIONS
       calcPricePerPound = () => {
-        const shortTon = 2000;
-        const metricTon = 2204.62;      
-        
+            const shortTon = 2000;
+            const metricTon = 2204.62;      
+            
 
-        if(this.state.unit === 'bu'){
-            this.setState((state) => ({pricePerPound: (state.price/state.grain.TW)}), () => {
-              this.setState({
-                buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
-                stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-                mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
-                cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
-              })
-            })
+            if(this.state.unit === 'bu'){
+                this.setState((state) => ({pricePerPound: (state.price/state.grain.TW)}), () => {
+                  this.setState({
+                    buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                    stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                    mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+                    cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                  })
+                })
 
-        } else if(this.state.unit === 'st') {
-            this.setState((state) => ({pricePerPound: (state.price/shortTon)}), () =>
-            this.setState({
-              buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
-              stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-              mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
-              cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
-            }))
+            } else if(this.state.unit === 'st') {
+                this.setState((state) => ({pricePerPound: (state.price/shortTon)}), () =>
+                this.setState({
+                  buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                  stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                  mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+                  cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                }))
 
-        } else if(this.state.unit === 'mt'){
-            this.setState((state) => ({pricePerPound: (state.price/metricTon)}), () =>
-            this.setState({
-              buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
-              stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-              mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
-              cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
-            })
-            )
+            } else if(this.state.unit === 'mt'){
+                this.setState((state) => ({pricePerPound: (state.price/metricTon)}), () =>
+                this.setState({
+                  buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                  stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                  mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+                  cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                })
+                )
 
-        }
-
-        this.calcBuPrice();
-        this.calcSTPrice();
-        this.calcMTPrice();
-        this.calcCWTPrice();
-
+            }
 
     }
 
-    calcBuPrice() {
-
-            this.setState({buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`})
-
-           }
-
-      calcSTPrice() {
-
-            this.setState({stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`})
-      }
-
-      calcMTPrice() {
-
-            this.setState({mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`})
-
-      }
-
-      calcCWTPrice() {
-
-            this.setState({cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`})
-
-      }
-
       render() {
-        console.log(this.state.pricePerPound)
         
           const grains = this.state.data;
 
           const {
-            testWeight,
-            price,
-            unit,
+            grain,
             buPrice,
             stPrice,
             mtPrice,
@@ -183,7 +153,7 @@ export default class Home extends Component {
                             grains={grains}
                             setGrain={this.setGrain.bind(this)}
                             onClick={this.setTestWeight}
-                            name={this.state.grain.name}
+                            name={grain.name}
                           />
                     </Card.Title>
 
@@ -234,9 +204,6 @@ export default class Home extends Component {
                       </Form>
 
                         <PricePer 
-                              tw={testWeight}
-                              price={price}
-                              unit={unit}
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}

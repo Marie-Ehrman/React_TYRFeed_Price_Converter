@@ -43,7 +43,7 @@ export default class Menu extends Component {
                                         key={grain.id}
                                         onClick={(e) =>{this.props.setGrain(grain)} }
                                         >
-                                            {grain.name}
+                                        {grain.name}
                                     </Dropdown.Item>
                         )
                     }
