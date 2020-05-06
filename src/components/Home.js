@@ -74,11 +74,7 @@ export default class Home extends Component {
 
       handleSubmit = (e) => {
           this.calcPricePerPound();
-          this.calcBuPrice();
-          this.calcSTPrice();
-          this.calcMTPrice();
-          this.calcCWTPrice();
-          
+
           e.preventDefault();
       }
 
@@ -98,92 +94,70 @@ export default class Home extends Component {
         
 
         if(this.state.unit === 'bu'){
-            this.setState({pricePerPound: (this.state.price/this.state.grain.TW)})
-            // this.calcBuPrice();
-            // this.calcSTPrice();
-            // this.calcMTPrice();
-            // this.calcCWTPrice();
+            this.setState((state) => ({pricePerPound: (state.price/state.grain.TW)}), () => {
+              this.setState({
+                buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+                cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+              })
+            })
+
         } else if(this.state.unit === 'st') {
-            this.setState({pricePerPound: (this.state.price/shortTon)})
-            // this.calcBuPrice();
-            // this.calcSTPrice();
-            // this.calcMTPrice();
-            // this.calcCWTPrice();
+            this.setState((state) => ({pricePerPound: (state.price/shortTon)}), () =>
+            this.setState({
+              buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+              stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+              mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+              cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+            }))
+
         } else if(this.state.unit === 'mt'){
-            this.setState({pricePerPound: (this.state.price/metricTon)})
-            // this.calcBuPrice();
-            // this.calcSTPrice();
-            // this.calcMTPrice();
-            // this.calcCWTPrice();
+            this.setState((state) => ({pricePerPound: (state.price/metricTon)}), () =>
+            this.setState({
+              buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+              stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+              mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+              cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+            })
+            )
+
         }
 
+        this.calcBuPrice();
+        this.calcSTPrice();
+        this.calcMTPrice();
+        this.calcCWTPrice();
 
-        console.log(this.state.pricePerPound)
 
     }
 
     calcBuPrice() {
 
-        const {
-          pricePerPound,
-          price,
-          grain
-        } = this.state;
+            this.setState({buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`})
 
-        if(this.state.unit === 'bu'){
-          console.log("IN BU PRICE 1");
-            this.setState({buPrice: `$ ${(price * 1).toFixed(2)}`})
-            this.setState({stPrice: `$ ${(2000 * pricePerPound).toFixed(2)}`})
-
-
-        } else {
-          console.log("IN BU PRICE 2");
-            this.setState({buPrice: `$ ${(grain.TW * pricePerPound).toFixed(2)}`})
-
-        }
-
-      }
+           }
 
       calcSTPrice() {
 
-        const {
-          pricePerPound,
-        } = this.state;
-
-        console.log("IN ST PRICE");
-
-            this.setState({stPrice: `$ ${(2000 * pricePerPound).toFixed(2)}`})
-
-
+            this.setState({stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`})
       }
 
       calcMTPrice() {
 
-        const {
-          pricePerPound,
-        } = this.state;
-
-
-        console.log("IN MT PRICE");
-
-            this.setState({mtPrice: `$ ${(2204.62 * pricePerPound).toFixed(2)}`})
-
+            this.setState({mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`})
 
       }
 
       calcCWTPrice() {
-        const {
-          pricePerPound,
-        } = this.state;
-        
-        console.log("IN CWT PRICE");
 
-          this.setState({cwtPrice: `$ ${(pricePerPound * 100).toFixed(2)}`})
+            this.setState({cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`})
 
       }
 
       render() {
-
+        console.log(this.state.pricePerPound)
+        
           const grains = this.state.data;
 
           const {
