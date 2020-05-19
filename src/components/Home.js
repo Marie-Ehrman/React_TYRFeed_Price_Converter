@@ -7,7 +7,8 @@ import FormControl from 'react-bootstrap/Form';
 
 
 import Menu from './Menu';
-import PricePer from './PricePer'
+import PricePer from './PricePer';
+import Canadian from './Canadian';
 // import APIkey from './config';
 
 
@@ -184,7 +185,6 @@ export default class Home extends Component {
                             active
                             onClick={this.handleClick}>Metric Ton</Button>
                     </Card.Subtitle> 
-                    <br></br>
                     <Form>
                         <Form.Group>
                           <Form.Label>Quoted Price</Form.Label>
@@ -202,14 +202,21 @@ export default class Home extends Component {
                           </Form.Text>
                         </Form.Group>
                       </Form>
-
                         <PricePer 
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}
                               cwtPrice={cwtPrice}
                         />
+                        <br></br>
+                        <Canadian
+                              buPrice={buPrice}
+                              stPrice={stPrice}
+                              mtPrice={mtPrice}
+                              cwtPrice={cwtPrice}
+                        />
                 </Card.Body>
+
             </Card>
 
         )
