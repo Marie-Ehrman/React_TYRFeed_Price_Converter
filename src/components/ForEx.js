@@ -8,7 +8,7 @@ import PricePer from './PricePer';
 
 
 
-export default class Canadian extends Component {
+export default class ForEx extends Component {
 
 state = {
     exchangeRate: null,
@@ -81,7 +81,7 @@ console.log(this.state.toggleCanadian);
                 <Button 
                     variant="outline-success"
                     type="submit"
-                    onClick={this.handleClick}> Canadian
+                    onClick={this.handleClick}> Currency Conversion
                 </Button> 
 
                 {this.state.toggleCanadian ? 

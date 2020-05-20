@@ -8,7 +8,7 @@ import FormControl from 'react-bootstrap/Form';
 
 import Menu from './Menu';
 import PricePer from './PricePer';
-import Canadian from './Canadian';
+import ForEx from './ForEx';
 // import APIkey from './config';
 
 
@@ -209,7 +209,7 @@ export default class Home extends Component {
                               cwtPrice={cwtPrice}
                         />
                         <br></br>
-                        <Canadian
+                        <ForEx
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}
