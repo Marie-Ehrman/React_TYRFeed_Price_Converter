@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import FormControl from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
+// import axios from 'axios';
 
 import PricePer from './PricePer';
 
@@ -13,6 +13,7 @@ export default class ForEx extends Component {
 state = {
     exchangeRate: null,
     toggleCanadian: false,
+    lbsPriceCAD: null,
     buPriceCAD: null,
     stPriceCAD: null,
     mtPriceCAD: null,
@@ -32,11 +33,9 @@ handleSubmit = (e) => {
 }
 
 handleClick = (e) => {
-    if(this.state.toggleCanadian === false){
-        this.setState({toggleCanadian: true});
-    } else if(this.state.toggleCanadian === true){
-        this.setState({toggleCanadian: false});
-    }
+    !this.state.toggleCanadian ?
+        this.setState({toggleCanadian: true})
+      : this.setState({toggleCanadian: false})
 }
 
 setPrice = (e) => {
@@ -51,6 +50,7 @@ calcPricePerPoundCAD() {
 
         this.setState(() => {
           this.setState({
+            lbsPriceCAD: `$ ${((this.props.lbsPrice).slice(2) * this.state.exchangeRate).toFixed(2)}`,
             buPriceCAD: `$ ${((this.props.buPrice).slice(2) * this.state.exchangeRate).toFixed(2)}`,
             stPriceCAD: `$ ${((this.props.stPrice).slice(2) * this.state.exchangeRate).toFixed(2)}`,
             mtPriceCAD: `$ ${((this.props.mtPrice).slice(2) * this.state.exchangeRate).toFixed(2)}`,
@@ -62,10 +62,8 @@ calcPricePerPoundCAD() {
 
     render() {
 
-console.log(this.state.exchangeRate);
-console.log(this.state.toggleCanadian);
-
     const {
+        lbsPriceCAD,
         buPriceCAD,
         stPriceCAD,
         mtPriceCAD,
@@ -99,11 +97,13 @@ console.log(this.state.toggleCanadian);
                     type="submit"
                     onClick={this.handleSubmit}> Calculate
                 </Button>  
-                <PricePer 
-                              buPrice={buPriceCAD}
-                              stPrice={stPriceCAD}
-                              mtPrice={mtPriceCAD}
-                              cwtPrice={cwtPriceCAD}
+                <br></br>
+                <PricePer       
+                    lbsPrice={lbsPriceCAD}       
+                    buPrice={buPriceCAD}
+                    stPrice={stPriceCAD}
+                    mtPrice={mtPriceCAD}
+                    cwtPrice={cwtPriceCAD}
                         />    
                 
                     <Form.Text className="text-muted">

@@ -14,12 +14,10 @@ export default class Menu extends Component {
 
     handleDropdown = (e) => {
         // console.log(e.target.innerHTML);
-        this.props.grains.map(grain => {
-            
+        this.props.grains.forEach(grain => {    
             if(e.target.innerHTML === grain.name){
                 this.setState({grain});
             }
-
         })
     }
 

@@ -16,6 +16,9 @@ export default class PricePer extends Component {
                 <Card.Header>Price Per:</Card.Header>
 
                     <ListGroup variant="flush">
+                    <ListGroup.Item>{ `Pounds =` + " " }
+                            <output>{ this.props.lbsPrice }</output>
+                        </ListGroup.Item>
                         <ListGroup.Item>{ `Bushel =` + " " }
                             <output>{ this.props.buPrice }</output>
                         </ListGroup.Item>

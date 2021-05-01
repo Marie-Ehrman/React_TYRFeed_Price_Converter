@@ -43,7 +43,6 @@ export default class Home extends Component {
         
         axios.get('../../data.json')
         .then(response => 
-        //   console.log(response.data.grains)
           this.setState({data: response.data.grains})
           )
 
@@ -64,7 +63,9 @@ export default class Home extends Component {
     //HANDLERS
 
       handleClick = (e) => {
-          if(e.target.innerHTML === 'Bushel'){
+          if(e.target.innerHTML === 'Pounds'){
+            this.setState({unit: 'lbs'});
+          } else if(e.target.innerHTML === 'Bushel'){
             this.setState({unit: 'bu'});
           } else if(e.target.innerHTML === 'Short Ton') {
             this.setState({unit: 'st'});
@@ -75,13 +76,11 @@ export default class Home extends Component {
 
       handleSubmit = (e) => {
           this.calcPricePerPound();
-
           e.preventDefault();
       }
 
       setPrice = (e) => {
             this.setState({price: e.target.value});
-
       }
 
       setGrain(grain){
@@ -95,39 +94,48 @@ export default class Home extends Component {
             const shortTon = 2000;
             const metricTon = 2204.62;      
             
-
-            if(this.state.unit === 'bu'){
+            if(this.state.unit === 'lbs'){
+              this.setState((state) => ({pricePerPound: (state.price * 1.00)}), () => {
+                this.setState({
+                  lbsPrice: `$ ${(this.state.pricePerPound).toFixed(2)}`,
+                  buPrice: `$ ${(this.state.pricePerPound * this.state.grain.TW).toFixed(2)}`,
+                  stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                  mtPrice: `$ ${(2204.6 * this.state.pricePerPound).toFixed(2)}`,
+                  cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                })
+              })
+          } else if(this.state.unit === 'bu'){
                 this.setState((state) => ({pricePerPound: (state.price/state.grain.TW)}), () => {
                   this.setState({
+                    lbsPrice: `$ ${(this.state.pricePerPound).toFixed(2)}`,
                     buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
                     stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-                    mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
+                    mtPrice: `$ ${(2204.6 * this.state.pricePerPound).toFixed(2)}`,
                     cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
                   })
                 })
-
             } else if(this.state.unit === 'st') {
                 this.setState((state) => ({pricePerPound: (state.price/shortTon)}), () =>
-                this.setState({
-                  buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
-                  stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-                  mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
-                  cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
-                }))
-
+                  this.setState({
+                    lbsPrice: `$ ${(this.state.pricePerPound).toFixed(2)}`,
+                    buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                    stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                    mtPrice: `$ ${(2204.6 * this.state.pricePerPound).toFixed(2)}`,
+                    cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                  })
+                )
             } else if(this.state.unit === 'mt'){
                 this.setState((state) => ({pricePerPound: (state.price/metricTon)}), () =>
-                this.setState({
-                  buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
-                  stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
-                  mtPrice: `$ ${(2204.62 * this.state.pricePerPound).toFixed(2)}`,
-                  cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
-                })
+                  this.setState({
+                    lbsPrice: `$ ${(this.state.pricePerPound).toFixed(2)}`,
+                    buPrice: `$ ${(this.state.grain.TW * this.state.pricePerPound).toFixed(2)}`,
+                    stPrice: `$ ${(2000 * this.state.pricePerPound).toFixed(2)}`,
+                    mtPrice: `$ ${(2204.6 * this.state.pricePerPound).toFixed(2)}`,
+                    cwtPrice: `$ ${(this.state.pricePerPound * 100).toFixed(2)}`
+                  })
                 )
-
             }
-
-    }
+      }
 
       render() {
         
@@ -135,6 +143,7 @@ export default class Home extends Component {
 
           const {
             grain,
+            lbsPrice,
             buPrice,
             stPrice,
             mtPrice,
@@ -173,6 +182,11 @@ export default class Home extends Component {
                             className="card-buttons"
                             variant="flat"
                             active
+                            onClick={this.handleClick}>Pounds</Button>
+                        <Button 
+                            className="card-buttons"
+                            variant="flat"
+                            active
                             onClick={this.handleClick}>Bushel</Button>
                         <Button
                             className="card-buttons"
@@ -203,6 +217,7 @@ export default class Home extends Component {
                         </Form.Group>
                       </Form>
                         <PricePer 
+                              lbsPrice={lbsPrice}
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}
@@ -210,6 +225,7 @@ export default class Home extends Component {
                         />
                         <br></br>
                         <ForEx
+                              lbsPrice={lbsPrice}
                               buPrice={buPrice}
                               stPrice={stPrice}
                               mtPrice={mtPrice}
